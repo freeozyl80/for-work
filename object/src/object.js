@@ -4,8 +4,11 @@ object 的实例中有的方法：
 */
 	var a; 
 	//a.constructor === Object (native code);
+	// var A = function() {} => A.prototype.constructor = function () {}
+	// var a = new A() => a.constructor = function () {}
 /*
-	b. hasOwnProperty(propertyName)。 =>用于检查给定属性在当前对象实例中是否存在。 
+	b. hasOwnProperty(propertyName)。 =>用于检查给定属性在当前对象实例中是否存在。
+	in => 只要存在就返回true 
 */
 	Object.prototype.P = 1;
 	var test = new Object();
@@ -119,6 +122,7 @@ object 的实例中有的方法：
 	var Child = function () {};
 	var child = new Child();
 	Child.prototype.constructor = Child;
+	// 其实constructor的消失是因为 prototype的重写
 	Child.prototype = new Parent();
 	console.log(child.__proto__)  // Parent();
 	console.log(Child.prototype) // Parent();
@@ -187,3 +191,56 @@ object 的实例中有的方法：
 	   	}
 	);
 	console.log(G.temp)
+/*
+	工厂模式
+	构造函数模式  =》 不同实例上的函数是不相等的   =》 所以要定义在prototype上
+*/
+
+/*
+	getOwenPropertyNames 获取所有包括不可枚举的属性。
+*/	
+/*
+	原型链的问题
+*/
+	// this.colors 继承以后变成共享的了！！！！！
+	function SuperType () {
+		this.colors = ['red','blue'];
+	}
+	function SubType () {
+
+	}
+	SubType.prototype = new SuperType();
+	var instance1 = new SubType();
+	var instance2 = new SubType();
+	instance1.colors.push('pink');
+	console.log(instance2.colors);
+	
+	// 解决方法  组合继承
+	function Super(name) {
+		this.name = name;
+		this.colors = ['red' , 'yellow'];
+	}	
+	Super.prototype.say = function () {
+		console.log(this.name);
+	}
+	function Sub (name ,age) {
+		Super.call (this, name);
+		this.age = age;
+	}
+	Sub.prototype = new Super;
+	Sub.prototype.constructor = Sub;
+	Sub.prototype.sayAge = function () {
+		console.log(this.age);
+	}
+	// 原型式继承
+	var person = {
+		name: 'zhangyunlu',
+		friends: ['a','b']
+	}
+	var anotherPerson = Object.create(person);
+	//Object.create =>
+	// function object(o){
+	//	function F(){};
+	//	F.prototype = o;
+	//	return new F();
+	//}
