@@ -244,3 +244,4 @@ object 的实例中有的方法：
 	//	F.prototype = o;
 	//	return new F();
 	//}
+	//Rectangle.prototype = Object.create(Shape.prototype);
