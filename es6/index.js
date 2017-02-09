@@ -29,3 +29,24 @@ iterator.next();                             // { value: undefined, done: true }
 
 // 解构赋值
 var [name, value] = ["color", "red"]
+
+// ES5 的写法  
+function f(x, y, z) {  
+// ...  
+}  
+var args = [0, 1, 2];  
+f.apply(null, args);  
+// ES6 的写法  
+function f(x, y, z) {  
+// ...  
+}  
+var args = [0, 1, 2];  
+f(...args);  
+
+
+// ES5 的写法  
+Math.max.apply(null, [14, 3, 77])  
+// ES6 的写法  
+Math.max(...[14, 3, 77])  
+//  等同于  
+Math.max(14, 3, 77);  

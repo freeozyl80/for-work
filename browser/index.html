@@ -1,0 +1,17 @@
+<!doctype>
+<meta charset="utf-8">
+<head>
+	<title>浏览器异常捕获测试</title>
+</head>
+<body>
+	<div>浏览器异常捕获测试</div>
+	<!-- crossorigin 需要服务端进行Allow控制 -->
+	<script crossorigin src="http://127.0.0.1:8001/index.js"></script>
+	<script>
+		//这里页面用本地打开，js文件用服务器启动。
+		//由于不同域，异常信息被mute出去。	
+		window.onerror = function () {
+			console.log(arguments);
+		}
+	</script>
+</body>
