@@ -30,24 +30,25 @@ Object.prototype.isPrototypeOf(c) == true; // true;
 	mixin对象模式   => 但是mixin的方法不能访问属性 propertire到接受者作为访问属性，object.assign是可以的
 */
 console.log('object assign');
+
 function d(argument) {
 	// body...
 };
 receiver = {
 	constructor: d,
-	d1: function () {},
-	d2: function () {}
+	d1: function() {},
+	d2: function() {}
 };
-Object.keys(d.prototype).forEach(function (key) {
+Object.keys(d.prototype).forEach(function(key) {
 	console.log(d.prototype[key].toString());
 });
 
 var receiver = {},
-    supplier = {
-	get name() {
-		return "file.js";
-	}
-};
+	supplier = {
+		get name() {
+			return "file.js";
+		}
+	};
 Object.assign(receiver, supplier);
 // getOwnPropertyDescriptor 是返回指定对象的一个自由属性对应的属性描述符
 // e.g value,writable,get.set.configureable,enumerable
@@ -92,11 +93,12 @@ function Shape() {
 	this.x = 0;
 	this.y = 0;
 }
-Shape.prototype.move = function (x, y) {
+Shape.prototype.move = function(x, y) {
 	this.x += x;
 	this.y += y;
 	console.info("Shape moved.");
 };
+
 function Rectangle() {
 	Shape.call(this);
 }
@@ -113,9 +115,9 @@ rect.move(1, 1); //Outputs, "Shape moved."
 	contructor 是实例去找类。
 */
 console.log('prototype');
-var Parent = function () {};
+var Parent = function() {};
 var parent = new Parent();
-var Child = function () {};
+var Child = function() {};
 var child = new Child();
 Child.prototype.constructor = Child;
 Child.prototype = new Parent();
@@ -126,7 +128,7 @@ console.log(Child.prototype); // Parent();
 */
 console.log("super");
 var E = {
-	fun: function () {
+	fun: function() {
 		console.log('eee');
 	}
 };
@@ -159,3 +161,14 @@ class FF extends F {
 		return this.param;
 	}
 }
+
+Object.prototype.create = function(obj) {
+	if (Object.prototype.create) {
+		return Object.prototype.create //特性检测，判断浏览器是否兼容  
+	} else {
+		function F() {
+			F.prototype = obj; //以传入参数为原型构造对象  
+			return new F();
+		}
+	}
+};

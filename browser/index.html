@@ -4,7 +4,15 @@
 	<title>浏览器异常捕获测试</title>
 </head>
 <body>
+	<style>
+		#example {
+		  font-size: 3em;
+		  margin: 0;
+		  -webkit-text-stroke: 2px red;
+		}
+	</style>
 	<div>浏览器异常捕获测试</div>
+	<p id="example">The stroke of this text is red.</p>
 	<!-- crossorigin 需要服务端进行Allow控制 -->
 	<script crossorigin src="http://127.0.0.1:8001/index.js"></script>
 	<script>
