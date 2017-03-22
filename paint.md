@@ -30,3 +30,14 @@ Javascript => Style => Layout => Paint => Composite
 1. http头 cache-control:no-cache
 2. https无法缓存
 3. POST请求无法被缓存
+
+<!-- 还是没有好好的理解到位整个浏览器渲染过程 -->
+repaint 重绘 发生在元素的可见性发生变化时候，诸如背景色，前景色。一般回流必将引起重绘制
+reflow 回流 Dom操作 => frame
+	> 导致回流的原因
+		1.初始化
+		2.渐进回流，即：里面的元素变了
+		3.改变大小
+		4.样式改变
+		5.Dirty
+render tree
